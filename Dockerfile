@@ -1,16 +1,17 @@
-# Use the official Ubuntu 22.04 LTS image as the base image
+# Use Rust Alpine image as the base image
 FROM rust:1.71-alpine
 
 # Install required dependencies
 RUN apk add --update \
     alpine-sdk \
     ffmpeg \
-    youtube-dl \
+    yt-dlp \
     pkgconfig \
     cmake \
     openssl-dev \
     musl-dev \
-    openssl
+    openssl \
+    libc6-compat
 
 # Create a new directory for your application
 WORKDIR /app
