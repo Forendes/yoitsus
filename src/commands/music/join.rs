@@ -1,5 +1,6 @@
 use serenity::framework::standard::macros::command;
 use serenity::framework::standard::CommandResult;
+use serenity::futures::future::ready;
 use serenity::model::prelude::*;
 use serenity::prelude::*;
 
@@ -16,7 +17,7 @@ async fn join(ctx: &Context, msg: &Message) -> CommandResult {
         .expect("Songbird Voice client placed in at initialisation.")
         .clone();
 
-    let bot_id = UserId::from(962051631619407963 as u64);
+    let bot_id = ctx.cache.current_user_id();
 
     let bot_joined = guild
         .voice_states
