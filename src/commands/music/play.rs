@@ -84,6 +84,12 @@ async fn play(ctx: &Context, msg: &Message, args: Args) -> CommandResult {
         }
     }
     if let Some(handler_lock) = manager.get(guild_id) {
+
+        // Handle YT Music by redirecting to youtube.com equivalent
+        if url.clone().starts_with("http") && url.contains("music.") {
+            let _ = url.replace("music.", "");
+        }
+
         // search on youtube for video with given name and pick first from search result
         if !url.clone().starts_with("http") {
             let mut handler = handler_lock.lock().await;
