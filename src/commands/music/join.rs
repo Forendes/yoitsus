@@ -1,6 +1,5 @@
 use serenity::framework::standard::macros::command;
 use serenity::framework::standard::CommandResult;
-use serenity::futures::future::ready;
 use serenity::model::prelude::*;
 use serenity::prelude::*;
 
