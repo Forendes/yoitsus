@@ -2,10 +2,10 @@ use chat_gpt_lib_rs::{ChatGPTClient, ChatInput, Message, Model, Role};
 use serenity::framework::standard::macros::command;
 use serenity::framework::standard::CommandResult;
 use serenity::model::prelude::*;
-use tracing::log::error;
 use serenity::prelude::*;
 use std::env;
 use tracing::info;
+use tracing::log::error;
 
 #[command]
 async fn askgpt(ctx: &Context, msg: &serenity::model::channel::Message) -> CommandResult {
@@ -51,14 +51,14 @@ async fn askgpt(ctx: &Context, msg: &serenity::model::channel::Message) -> Comma
         Err(why) => {
             error!("Err getting response from GPT: {:?}", why);
             msg.channel_id
-            .send_message(&ctx.http, |m| {
-                m.embed(|e| {
-                    e.colour(0xf38ba8)
-                        .title(":warning: Unable to get response from ChatGPT.")
-                        .timestamp(Timestamp::now())
+                .send_message(&ctx.http, |m| {
+                    m.embed(|e| {
+                        e.colour(0xf38ba8)
+                            .title(":warning: Unable to get response from ChatGPT.")
+                            .timestamp(Timestamp::now())
+                    })
                 })
-            })
-            .await?;
+                .await?;
             return Ok(());
         }
     };

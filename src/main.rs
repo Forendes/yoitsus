@@ -24,6 +24,7 @@ use crate::commands::help::*;
 use crate::commands::roll::*;
 
 use crate::commands::music::clear::*;
+use crate::commands::music::join::*;
 use crate::commands::music::leave::*;
 use crate::commands::music::nowplaying::*;
 use crate::commands::music::pause::*;
@@ -33,7 +34,6 @@ use crate::commands::music::resume::*;
 use crate::commands::music::shuffle::*;
 use crate::commands::music::skip::*;
 use crate::commands::music::stop::*;
-use crate::commands::music::join::*;
 
 /* Shards container */
 pub struct ShardManagerContainer;
