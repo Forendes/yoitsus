@@ -37,6 +37,8 @@ async fn play(ctx: &Context, msg: &Message, args: Args) -> CommandResult {
     let guild = msg.guild(&ctx.cache).unwrap();
     let guild_id = guild.id;
 
+    let mut tracks_to_remove = 1;
+
     let manager = songbird::get(ctx)
         .await
         .expect("Songbird Voice client placed in at initialisation.")
@@ -171,7 +173,7 @@ async fn play(ctx: &Context, msg: &Message, args: Args) -> CommandResult {
                     .captures_iter(&raw_list)
                     .map(|cap| cap[1].to_string())
                     .collect();
-
+                
                 let clone_urls = urls.clone();
                 for url in clone_urls {
                     info!("Queueing --> {}", url);
@@ -184,6 +186,7 @@ async fn play(ctx: &Context, msg: &Message, args: Args) -> CommandResult {
                         Err(why) => {
                             error!("Err starting source: {:?}", why);
                             urls.remove(0);
+                            tracks_to_remove += 1;
                             continue;
                         }
                     };
@@ -313,7 +316,8 @@ async fn play(ctx: &Context, msg: &Message, args: Args) -> CommandResult {
             })
             .await?;
 
-        urls.remove(0);
+        info!("Gonna remove tracks from 0..{tracks_to_remove}");
+        urls.drain(0..tracks_to_remove);
 
         let (tx, _rx): (
             mpsc::Sender<Option<(usize, TrackHandle)>>,
