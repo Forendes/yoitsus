@@ -174,6 +174,7 @@ async fn play(ctx: &Context, msg: &Message, args: Args) -> CommandResult {
                     .map(|cap| cap[1].to_string())
                     .collect();
                 
+
                 let clone_urls = urls.clone();
                 for url in clone_urls {
                     info!("Queueing --> {}", url);
