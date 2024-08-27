@@ -1,6 +1,6 @@
 # Yoitsus
 
-Edited version that supports web dashboard [https://github.com/Forendes/yoitsus-dashboard]
+Edited version that supports web [dashboard](https://github.com/Forendes/yoitsus-dashboard)
 
 A web discord bot written in **Rust** with the help of [serenity](https://github.com/serenity-rs/serenity) and [songbird](https://github.com/serenity-rs/songbird).
 
